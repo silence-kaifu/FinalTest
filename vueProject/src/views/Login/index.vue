@@ -47,7 +47,7 @@ import { Store } from "vuex";
 import store from "@/store/index";
 export default defineComponent({
   name: "",
-  setup() {
+  setup(props,ctx) {
     const {ctx}=getCurrentInstance();
     const login = () => {
       const $store: Store<any> = store;
