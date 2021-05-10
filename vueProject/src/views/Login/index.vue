@@ -40,12 +40,15 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import {api} from '../../global/api';
+import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs} from "vue";
+import  Vue from "vue";
 import { Store } from "vuex";
 import store from "@/store/index";
 export default defineComponent({
   name: "",
-  setup: () => {
+  setup() {
+    const {ctx}=getCurrentInstance();
     const login = () => {
       const $store: Store<any> = store;
       $store.dispatch("GET_ROUTERS_DATA");
@@ -54,11 +57,24 @@ export default defineComponent({
       username: "",
       password: "",
     });
+    onMounted(()=>{
+      sendHTTP();
+    });
+    function sendHTTP(){
+      ctx.$http.post(api.login,{
+        state
+      })
+      .then((res: any)=>{
+        console.log(res)
+      })
+    }
     return {
       login,
       ...toRefs(state),
+      sendHTTP,
     };
   },
+
 });
 </script>
 <style scoped>
