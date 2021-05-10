@@ -1,6 +1,6 @@
 import { initRouter } from '@/router/index'
 import router from '@/router/index'
-
+import {api} from '../../global/api';
 const user = {
     state:{
         routers:JSON.parse(localStorage.getItem('v3-element-plus-menu') || '[]'),
@@ -16,7 +16,7 @@ const user = {
     },
     actions:{
         GET_ROUTERS_DATA(ctx:any){
-            fetch("/menu.json")
+            fetch(api.login)
                 .then((res:any) => res.json())
                 .then((data:any) => {
                     localStorage.setItem('v3-element-plus-menu',JSON.stringify(data.menu))

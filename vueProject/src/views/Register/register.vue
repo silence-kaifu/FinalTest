@@ -8,34 +8,27 @@
       <form>
         <div class="user-box">
           <input
-            autocomplete="new-password"
-            type="text"
-            name=""
-            v-model="username"
-            required=""
-            key="username-v3"
+              autocomplete="new-password"
+              type="text"
+              name=""
+              v-model="username"
+              required=""
+              key="username-v3"
           />
           <label>账号</label>
         </div>
         <div class="user-box">
           <input
-            autocomplete="new-password"
-            type="password"
-            name=""
-            v-model="password"
-            required=""
-            key="password-v3"
+              autocomplete="new-password"
+              type="password"
+              name=""
+              v-model="password"
+              required=""
+              key="password-v3"
           />
           <label>密码</label>
         </div>
-        <a href="#" style="left:240px;" @click="login">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          登录
-        </a>
-        <a href="#" style="left:240px;" @click="window.location.href = 'http://localhost:8080/register'">
+        <a href="#" style="left:240px;" @click="register">
           <span></span>
           <span></span>
           <span></span>
@@ -56,7 +49,7 @@ export default defineComponent({
   name: "",
   setup:()=> {
     // const {ctx}=getCurrentInstance();
-    const login = () => {
+    const register = () => {
       const $store: Store<any> = store;
       $store.dispatch("GET_ROUTERS_DATA");
     };
@@ -76,7 +69,7 @@ export default defineComponent({
     //   })
     // }
     return {
-      login,
+      register,
       ...toRefs(state),
       // sendHTTP,
     };
