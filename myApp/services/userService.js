@@ -1,5 +1,5 @@
 const db = require('./../sql/db');
-const api = require('./../../vueProject/src/global/api');
+// const api = require('./../../vueProject/src/global/api');
 exports.login = (req,res,next) => {
     let loginForm = api.api.login;
     console.log(loginForm);

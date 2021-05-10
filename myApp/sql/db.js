@@ -9,7 +9,6 @@ exports.base = (sql,data,callback) => {
     });
 
     connection.connect();
-
     connection.query(sql,data,function (error,result,fields) {
         if(error) throw error;
         callback(result);
