@@ -5,7 +5,7 @@ exports.base = (sql,data,callback) => {
         host : 'localhost',
         user : 'root',
         password : 'root1234',
-        database : 'kity'
+        database : 'qmks'
     });
 
     connection.connect();

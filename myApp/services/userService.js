@@ -1,8 +1,9 @@
-const db = require('./../sql/dbConfig');
-
+const db = require('./../sql/db');
+const api = require('./../../vueProject/src/global/api');
 exports.login = (req,res,next) => {
-    let loginForm = req.body.loginForm;
-    let sql = 'SELECT * FROM sys_user WHERE name=? and password=?';
+    let loginForm = api.api.login;
+    console.log(loginForm);
+    let sql = 'SELECT * FROM tab_stu WHERE name=? and password=?';
     let data = [loginForm.username,loginForm.password];
     db.base(sql,data,(response)=>{
         if (response.length == 0) {
