@@ -6,7 +6,7 @@
 <script lang="ts">
 import{ defineComponent }from 'vue';
 export default defineComponent({
-    name: "haha",
+    name: "学分请求信箱",
     setup: () => {
 
     }

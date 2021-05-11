@@ -1,7 +1,7 @@
 <template>
     <div class="logo-wrapper">
         <img src="~@/assets/logo.png" alt="">
-        <span v-if="!isCollapse" class="logo-text">vue3-element-plus</span>
+        <span v-if="!isCollapse" class="logo-text">区块链学院学分管理</span>
     </div>
 </template>
 <script lang="ts">

@@ -47,42 +47,75 @@
   </div>
 </template>
 <script lang="ts">
-// import {api} from '../../global/api';
+import {api} from '../../global/api';
 import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs} from "vue";
 // import  Vue from "vue";
 import { Store } from "vuex";
 import store from "@/store/index";
+// export default defineComponent({
+//   name: "",
+//   setup:()=> {
+//     // const {ctx}=getCurrentInstance();
+//     const login = () => {
+//       const $store: Store<any> = store;
+//       $store.dispatch("POST_ROUTERS_DATA");
+//
+//     };
+//     const state = reactive({
+//       username: "",
+//       password: "",
+//     });console.log(state)
+//
+//     // onMounted(()=>{
+//     //   sendHTTP();
+//     // });
+//     // function sendHTTP(){
+//     //   ctx.$http.post(api.login,{
+//     //     state
+//     //   })
+//     //   .then((res: any)=>{
+//     //     console.log(res)
+//     //   })
+//     // }
+//     return {
+//       login,
+//       ...toRefs(state),
+//       // sendHTTP,
+//     };
+//   },
+//
+// });
 export default defineComponent({
-  name: "",
-  setup:()=> {
-    // const {ctx}=getCurrentInstance();
-    const login = () => {
-      const $store: Store<any> = store;
-      $store.dispatch("GET_ROUTERS_DATA");
-    };
-    const state = reactive({
-      username: "",
-      password: "",
-    });
-    // onMounted(()=>{
-    //   sendHTTP();
-    // });
-    // function sendHTTP(){
-    //   ctx.$http.post(api.login,{
-    //     state
-    //   })
-    //   .then((res: any)=>{
-    //     console.log(res)
-    //   })
-    // }
-    return {
-      login,
-      ...toRefs(state),
-      // sendHTTP,
-    };
-  },
+  name:"login",
+  props:{},
+  setup(){
+    //@ts-ignore
+    const {proxy}=getCurrentInstance();
+    console.log(proxy);
+    let state = reactive({
+      data: {
+        username: "",
+        password: "",
+      }
+    });console.log(state)
+    //@ts-ignore
+    ++state;
 
-});
+    onMounted(()=>{
+
+      proxy.$axios.post(api.login,{state})
+          //@ts-ignore
+      .then(result=>{
+        console.log(result)
+      }).catch(()=>{
+        console.log("no")
+      })
+    });
+    return{
+      ...toRefs(state),
+    }
+  }
+})
 </script>
 <style scoped>
 #login-wrapper {

@@ -28,7 +28,7 @@
             "component": "Layout",
             "redirect":"/List/List-1",
             "meta":{
-                "title":"列表",
+                "title":"学生信息",
                 "icon":""
             },
             "children":[
@@ -36,7 +36,7 @@
                     "name":"List-1",
                     "path":"list-1",
                     "meta":{
-                        "title":"列表1",
+                        "title":"学生信息详情",
                         "icon":"",
                         "component":"List/list-1"
                     },
@@ -46,7 +46,7 @@
                     "name":"List-2",
                     "path":"list-2",
                     "meta":{
-                        "title":"列表2",
+                        "title":"学生信息概览",
                         "icon":"",
                         "component":"List/list-2"
                     },
@@ -57,7 +57,7 @@
         {
             "path":"/icon",
             "meta":{
-                "title":"图标",
+                "title":"学分图片凭证",
                 "icon":""
             },
             "children":[
@@ -76,7 +76,7 @@
         {
             "path":"/haha",
             "meta":{
-                "title":"哈哈",
+                "title":"学分请求信箱",
                 "icon":""
             },
             "children":[

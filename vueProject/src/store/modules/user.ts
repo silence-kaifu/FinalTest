@@ -15,23 +15,34 @@ const user = {
         }
     },
     actions:{
-        GET_ROUTERS_DATA(ctx:any){
-            fetch(api.login)
-                .then((res:any) => res.json())
-                .then((data:any) => {
-                    localStorage.setItem('v3-element-plus-menu',JSON.stringify(data.menu))
-                    ctx.commit('SET_ROUTERS',data.menu)
-                    ctx.commit('SET_LOGIN_STATE',true)
-                    initRouter(data.menu,undefined)   // 拼接路由信息
-                    data.menu.forEach((rt:any) => {  // 添加路由信息到实例
-                        router.addRoute(rt)
-                    })
-                    localStorage.setItem('v3-element-plus-token',JSON.stringify(data.token))
-                    router.push({path:'/home'})
-                })
-                .catch((err:any) => {
-                    console.log(err)
-                })
+        // GET_ROUTERS_DATA(ctx:any){
+        //     fetch('/menu.json',{
+        //         // method:'POST',
+        //     })
+        //         .then((res:any) => res.json())
+        //         .then((data:any) => {
+        //             localStorage.setItem('v3-element-plus-menu',JSON.stringify(data.menu))
+        //             ctx.commit('SET_ROUTERS',data.menu)
+        //             ctx.commit('SET_LOGIN_STATE',true)
+        //             initRouter(data.menu,undefined)   // 拼接路由信息
+        //             data.menu.forEach((rt:any) => {  // 添加路由信息到实例
+        //                 router.addRoute(rt)
+        //             })
+        //             localStorage.setItem('v3-element-plus-token',JSON.stringify(data.token))
+        //             router.push({path:'/home'})
+        //         })
+        //         .catch((err:any) => {
+        //             console.log(err)
+        //         })
+        // }
+        POST_ROUTERS_DATA(ctx:any){
+            console.log(ctx)
+            fetch(api.login,{
+                method:'POST',
+                body: JSON.stringify({ }),
+            })
+                .then((res:any)=>res.json())
+                .then()
         }
     }
 }
