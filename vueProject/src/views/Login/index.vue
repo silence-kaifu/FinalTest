@@ -92,26 +92,30 @@ export default defineComponent({
     //@ts-ignore
     const {proxy}=getCurrentInstance();
     console.log(proxy);
+    console.log(proxy.username)
+
+
+  const login=()=>{
+    proxy.$axios.post(api.login,{state})
+        //@ts-ignore
+        .then(result=>{
+          console.log(result)
+        }).catch(()=>{
+      console.log("no")
+    })
+  };
     let state = reactive({
       data: {
-        username: "",
+        username: proxy.username,
         password: "",
       }
     });console.log(state)
     //@ts-ignore
     ++state;
 
-    onMounted(()=>{
 
-      proxy.$axios.post(api.login,{state})
-          //@ts-ignore
-      .then(result=>{
-        console.log(result)
-      }).catch(()=>{
-        console.log("no")
-      })
-    });
     return{
+      login,
       ...toRefs(state),
     }
   }
