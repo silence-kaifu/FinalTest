@@ -11,5 +11,5 @@ const app = createApp(App)
             .mount('#app');
 import Axios from './axios/index'
 // @ts-ignore
-app.config.globalProperties.$axios = Axios
+app.config.globalProperties.$axios = Axios;
 // router.isReady().then(() => app.mount('#app'))
