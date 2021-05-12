@@ -10,8 +10,10 @@
 //     staticPath: process.env.NODE_ENV !== 'development' ? config.build.staticPath : config.dev.staticPath
 // };
 // ----------------请注意：如果正式环境，不需要本地json数据模拟，请删除以上代码和api中的模拟接口。----------------
+
 export const api = {
-    'login': 'http://localhost:7070/login'
+    'login': 'http://localhost:7070/login',
+    'register':'http://localhost:7070/register'
     // 'userRegister': url.staticPath+'static/userRegister.json',
     // 'home': url.staticPath + 'static/home.json',
     // 'department': url.staticPath + 'static/department.json',

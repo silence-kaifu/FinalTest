@@ -12,7 +12,10 @@
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.31",
     "qs": "^6.10.1",
+    "root": "^3.2.0",
+    "vee-validate": "^3.4.5",
     "vue": "^3.0.0",
+    "vue-axios": "^3.2.4",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

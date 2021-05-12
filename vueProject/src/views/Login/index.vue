@@ -5,13 +5,13 @@
     <div id='stars3'></div>
     <div class="login-box">
       <h2>区块链学院学分系统</h2>
-      <form>
+      <form :model="ruleForm" :rules="rules" ref="ruleFormsss">
         <div class="user-box">
           <input
             autocomplete="new-password"
             type="text"
             name=""
-            v-model="username"
+            v-model="ruleForm.username"
             required=""
             key="username-v3"
           />
@@ -22,104 +22,87 @@
             autocomplete="new-password"
             type="password"
             name=""
-            v-model="password"
+            v-model="ruleForm.password"
             required=""
             key="password-v3"
           />
           <label>密码</label>
         </div>
-        <a href="#" style="left:240px;" @click="login">
+        <a href="#" style="left:240px;" @click="submitForm">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           登录
         </a>
-        <a href="#" style="left:240px;" @click="window.location.href = 'http://localhost:8080/register'">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          注册
-        </a>
+<!--        <a href="#" style="left:240px;" @click="window.location.href = 'http://localhost:8080/register'">-->
+<!--          <span></span>-->
+<!--          <span></span>-->
+<!--          <span></span>-->
+<!--          <span></span>-->
+<!--          注册-->
+<!--        </a>-->
       </form>
     </div>
   </div>
 </template>
 <script lang="ts">
 import {api} from '../../global/api';
-import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs} from "vue";
-// import  Vue from "vue";
+import {useRouter} from 'vue-router';
+import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs,unref} from "vue";
 import { Store } from "vuex";
 import store from "@/store/index";
-// export default defineComponent({
-//   name: "",
-//   setup:()=> {
-//     // const {ctx}=getCurrentInstance();
-//     const login = () => {
-//       const $store: Store<any> = store;
-//       $store.dispatch("POST_ROUTERS_DATA");
-//
-//     };
-//     const state = reactive({
-//       username: "",
-//       password: "",
-//     });console.log(state)
-//
-//     // onMounted(()=>{
-//     //   sendHTTP();
-//     // });
-//     // function sendHTTP(){
-//     //   ctx.$http.post(api.login,{
-//     //     state
-//     //   })
-//     //   .then((res: any)=>{
-//     //     console.log(res)
-//     //   })
-//     // }
-//     return {
-//       login,
-//       ...toRefs(state),
-//       // sendHTTP,
-//     };
-//   },
-//
-// });
-export default defineComponent({
-  name:"login",
-  props:{},
-  setup(){
-    //@ts-ignore
-    const {proxy}=getCurrentInstance();
-    console.log(proxy);
-    console.log(proxy.username)
-
-
-  const login=()=>{
-    proxy.$axios.post(api.login,{state})
-        //@ts-ignore
-        .then(result=>{
-          console.log(result)
-        }).catch(()=>{
-      console.log("no")
+export default {
+  setup(props:any) {
+    const ruleFormsss = ref(null);
+    const {ctx}:any =getCurrentInstance();
+    const router=useRouter();
+    // 定义变量
+    const ruleForm = reactive({
+      username: '',
+      password: ''
     })
-  };
-    let state = reactive({
-      data: {
-        username: proxy.username,
-        password: "",
+
+    const rules = {
+      username: [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+      ],
+      password: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+      ]
+    }
+    const post=()=>{ ctx.$axios.post(api.login, {ruleForm}) // 网络请求
+        .then((result:any) => {
+          console.log("yes")
+          console.log(result)
+        }).catch(() => { console.log("no") })}
+    const submitForm = async () => {
+      const form = unref(ruleFormsss);
+      if (!form) return
+      try {
+        // await form.validate(undefined)
+        post();
+        //数据打印
+        console.log(ruleForm)
+       console.log("submit")
+        const { username, password, } = ruleForm;
+        console.log(username, password)
+
+
+      } catch (error) {
       }
-    });console.log(state)
-    //@ts-ignore
-    ++state;
-
-
-    return{
-      login,
-      ...toRefs(state),
+    }
+    return {
+      post,
+      ruleForm,
+      rules,
+      submitForm,
+      ruleFormsss
     }
   }
-})
+
+
+}
 </script>
 <style scoped>
 #login-wrapper {
