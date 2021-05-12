@@ -5,6 +5,7 @@ import store from './store'
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import axios from './http'
+import qs from 'qs'
 
 const app = createApp(App)
 

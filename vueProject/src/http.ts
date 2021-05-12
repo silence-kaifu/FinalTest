@@ -1,5 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ElLoading } from 'element-plus';
+import qs from 'qs'
+
+
+
 
 
 let loading: any;
@@ -43,5 +47,7 @@ axios.interceptors.response.use((response: AxiosResponse<any>) => {
     // 错误提醒
     return Promise.reject(error);
 })
+//axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+// axios.defaults.transformRequest = [obj => Qs.stringify(obj)]
 
 export default axios;

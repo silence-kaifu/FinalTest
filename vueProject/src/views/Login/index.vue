@@ -49,6 +49,7 @@
 <script lang="ts">
 import {api} from '../../global/api';
 import {useRouter} from 'vue-router';
+import qs from 'qs';
 import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs,unref} from "vue";
 import { Store } from "vuex";
 import store from "@/store/index";
@@ -71,7 +72,7 @@ export default {
         { required: true, message: '请输入密码', trigger: 'blur' },
       ]
     }
-    const post=()=>{ ctx.$axios.post(api.login, {ruleForm}) // 网络请求
+    const post=()=>{ ctx.$axios.post(api.login, qs.stringify(ruleForm)) // 网络请求
         .then((result:any) => {
           console.log("yes")
           console.log(result)
