@@ -8,5 +8,5 @@ var router = express.Router();
 // });
 // router.get('/',services.login)
 // router.options('/',services.login);
-router.post('/',services.login);
+router.post('/',services.register);
 module.exports = router;
