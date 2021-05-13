@@ -5,13 +5,13 @@
     <div id='stars3'></div>
     <div class="login-box">
       <h2>区块链学院学分系统</h2>
-      <form>
+      <form :model="registerForm" :rules="rules" ref="registerFormsss">
         <div class="user-box">
           <input
               autocomplete="new-password"
               type="text"
               name=""
-              v-model="username"
+              v-model="registerForm.username"
               required=""
               key="username-v3"
           />
@@ -22,7 +22,7 @@
               autocomplete="new-password"
               type="password"
               name=""
-              v-model="password"
+              v-model="registerForm.password"
               required=""
               key="password-v3"
           />
@@ -40,41 +40,55 @@
   </div>
 </template>
 <script lang="ts">
-// import {api} from '../../global/api';
-import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs} from "vue";
-// import  Vue from "vue";
-import { Store } from "vuex";
-import store from "@/store/index";
-export default defineComponent({
-  name: "",
-  setup:()=> {
-    // const {ctx}=getCurrentInstance();
-    const register = () => {
-      const $store: Store<any> = store;
-      $store.dispatch("GET_ROUTERS_DATA");
-    };
-    const state = reactive({
+import {api} from '../../global/api';
+import {useRouter} from 'vue-router';
+import qs from 'qs';
+import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs,unref} from "vue";
+export default ({
+  name:'Register',
+  setup(props:any) {
+    const registerFormsss = ref(null);
+    const {ctx}: any = getCurrentInstance();
+    const registerForm = reactive({
       username: "",
       password: "",
-    });
-    // onMounted(()=>{
-    //   sendHTTP();
-    // });
-    // function sendHTTP(){
-    //   ctx.$http.post(api.login,{
-    //     state
-    //   })
-    //   .then((res: any)=>{
-    //     console.log(res)
-    //   })
-    // }
-    return {
-      register,
-      ...toRefs(state),
-      // sendHTTP,
-    };
-  },
+    })
+    const post=()=>{ctx.$axios.post(api.register,qs.stringify(registerForm))
+      .then((result:any)=>{
+        //前后端连接成功
+        console.log("前后端连接成功")
+        //打印返回结果
+        console.log("打印返回结果")
+        console.log(result)
 
+      })
+      .catch(()=>{
+
+      })}
+
+    const register=async ()=>{
+      const form=unref(registerFormsss);
+      if(!form) return
+      try{
+
+        post()
+
+        console.log("进入注册环节")
+        const { username, password } = registerForm;
+        console.log(username, password)
+      }catch (error){
+
+      }
+    }
+    return {
+      post,
+      registerForm,
+      register,
+      registerFormsss
+    }
+
+
+  }
 });
 </script>
 <style scoped>

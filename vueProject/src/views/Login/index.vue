@@ -35,20 +35,24 @@
           <span></span>
           登录
         </a>
-<!--        <a href="#" style="left:240px;" @click="window.location.href = 'http://localhost:8080/register'">-->
-<!--          <span></span>-->
-<!--          <span></span>-->
-<!--          <span></span>-->
-<!--          <span></span>-->
-<!--          注册-->
-<!--        </a>-->
+        <a href="#" style="left:240px;" @click="register">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          注册
+        </a>
       </form>
     </div>
   </div>
+  <div>
+
+  </div>
 </template>
 <script lang="ts">
+import router from '@/router/index'
 import {api} from '../../global/api';
-import {useRouter} from 'vue-router';
+//import {useRouter} from 'vue-router';
 import qs from 'qs';
 import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs,unref} from "vue";
 import { Store } from "vuex";
@@ -57,7 +61,7 @@ export default {
   setup(props:any) {
     const ruleFormsss = ref(null);
     const {ctx}:any =getCurrentInstance();
-    const router=useRouter();
+   // const router=useRouter();
     // 定义变量
     const ruleForm = reactive({
       username: '',
@@ -74,17 +78,31 @@ export default {
     }
     const post=()=>{ ctx.$axios.post(api.login, qs.stringify(ruleForm)) // 网络请求
         .then((result:any) => {
-          console.log("yes")
+          //前后端连接成功
+          console.log("前后端连接成功")
+          //打印返回结果
+          console.log("打印返回结果")
           console.log(result)
-        }).catch(() => { console.log("no") })}
+          //打印返回结果状态，有没有正确匹配到用户
+
+          console.log(result.data.status)
+          //打印返回用户的类型
+          console.log(result.data.result.power)
+        }).catch(() => {
+          //console.log(qs.stringify(ruleForm))
+          window.location.href="http://localhost:8080/home";
+          console.log("no")
+          })}
     const submitForm = async () => {
       const form = unref(ruleFormsss);
       if (!form) return
       try {
         // await form.validate(undefined)
+        //执行post
         post();
         //数据打印
         console.log(ruleForm)
+        //
        console.log("submit")
         const { username, password, } = ruleForm;
         console.log(username, password)
@@ -93,12 +111,17 @@ export default {
       } catch (error) {
       }
     }
+
+    const register=()=>{
+      window.location.href = 'http://localhost:8080/register';
+    }
     return {
       post,
       ruleForm,
       rules,
       submitForm,
-      ruleFormsss
+      ruleFormsss,
+      register
     }
   }
 
