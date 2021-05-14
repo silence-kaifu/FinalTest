@@ -6,17 +6,19 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var registerRouter = require('./routes/register');
+var stuLoginRouter = require('./routes/student/login');
+var registerRouter = require('./routes/student/register');
 
 var app = express();
 
-// app.all('', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
-//   res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-//   next();
-// });
+//设置跨域访问
+app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By",' 3.2.1')
+  next();
+});
 
 
 // view engine setup
@@ -31,7 +33,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/login', usersRouter);
+
+//学生路由
+app.use('/login', stuLoginRouter);
 app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
