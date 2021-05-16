@@ -1,4 +1,4 @@
-var sqlMap = {
+const sqlMap = {
     user: {
         // 用户验证
         consfirm: 'select * from tab_stu where account = ? and password = ?',
@@ -115,5 +115,5 @@ var sqlMap = {
         // 更新成绩信息
         setGradeInfo: 'update sc set grade = ?, gradepo = ? where sno = ? and cno = ?'
     }
-}
+};
 module.exports = sqlMap

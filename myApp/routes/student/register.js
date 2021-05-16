@@ -1,30 +1,29 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql');
-var db = require('../../sql/db');
-var $sql = require('../../sql/sqlMap');
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql');
+const db = require('../../sql/db');
+const $sql = require('../../sql/sqlMap');
 
-var connection = mysql.createConnection(db.mysql);
+const connection = mysql.createConnection(db.mysql);
 connection.connect();
-var sql = $sql.user.register;
+const sql = $sql.user.register;
 
-router.post('/',(req, res, next) => {
-    var account = req.body.username;
-    var password = req.body.password;
-    connection.query(sql,[account,account,password,0], (err, result) => {
-        if(err) {
+router.post('/', (req, res, next) => {
+    let account = req.body.username;
+    let password = req.body.password;
+    connection.query(sql, [account, account, password, 0], (err, result) => {
+        if (err) {
             console.log(err)
             return
         }
         //通过insertID判断是否重复注册
-        if(result.insertId) {
+        if (result.insertId) {
             res.json({
                 status: '0',
                 msg: '新用户注册成功',
                 result: result
             });
-        }
-        else {
+        } else {
             res.json({
                 status: '1',
                 msg: '此用户注册过',

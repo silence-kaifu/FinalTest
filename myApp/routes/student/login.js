@@ -1,13 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var mysql = require('mysql')
-var db = require('../../sql/db')
-var $sql = require('../../sql/sqlMap')
+const express = require('express');
+const router = express.Router();
+const mysql = require('mysql')
+const db = require('../../sql/db')
+const $sql = require('../../sql/sqlMap')
 
-var connection = mysql.createConnection(db.mysql)
+const connection = mysql.createConnection(db.mysql)
 connection.connect()
 // 登录验证语句
-var sql = $sql.user.consfirm
+const sql = $sql.user.consfirm
 
 router.post('/', function (req, res, next) {
     var account = req.body.username;
