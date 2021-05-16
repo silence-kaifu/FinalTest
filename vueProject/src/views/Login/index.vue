@@ -89,7 +89,7 @@ export default {
           console.log(result.data.status)
           //打印返回用户的类型
           console.log(result.data.result.power)
-          const msg = result.data.mag;
+          const msg = result.data.msg;
           //打印返回结果状态，
 
             console.log(msg)
