@@ -69,11 +69,19 @@ export default ({
         console.log("打印返回结果")
         console.log(result)
         // ---------------------------
-        const msg = result.data.mag;
+        const msg = result.data.msg;
         //打印返回结果状态，
 
         console.log(msg)
-        ElMessage.error(msg);
+        if(result.data.status == 1) {
+          ElMessage.error(msg);
+        }
+        else{
+          console.log(msg)
+          ElMessage.success({
+            message:msg,type:'success'});
+          window.location.href="http://localhost:8080/login";
+        }
 
       })
       .catch(()=>{
