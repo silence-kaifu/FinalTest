@@ -28,12 +28,19 @@
           />
           <label>密码</label>
         </div>
-        <a href="#" style="left:240px;" @click="register">
+        <a href="#" style="left:200px;" @click="register">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           注册
+        </a>
+        <a href="#" style="left:200px;" @click="login">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          登录
         </a>
       </form>
     </div>
@@ -41,6 +48,7 @@
 </template>
 <script lang="ts">
 import {api} from '../../global/api';
+import { ElMessage } from 'element-plus';
 import {useRouter} from 'vue-router';
 import qs from 'qs';
 import {computed,ref,defineComponent, getCurrentInstance, onMounted, reactive, toRefs,unref} from "vue";
@@ -60,9 +68,17 @@ export default ({
         //打印返回结果
         console.log("打印返回结果")
         console.log(result)
+        // ---------------------------
+        const msg = result.data.mag;
+        //打印返回结果状态，
+
+        console.log(msg)
+        ElMessage.error(msg);
 
       })
       .catch(()=>{
+        const msg = "注册失败！网络错误,请稍后尝试！";
+        ElMessage.error(msg);
 
       })}
 
@@ -80,11 +96,17 @@ export default ({
 
       }
     }
+
+    const login=()=>{
+      window.location.href = '/login';
+
+    }
     return {
       post,
       registerForm,
       register,
-      registerFormsss
+      registerFormsss,
+      login
     }
 
 

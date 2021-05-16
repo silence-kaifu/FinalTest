@@ -28,14 +28,14 @@
           />
           <label>密码</label>
         </div>
-        <a href="#" style="left:240px;" @click="submitForm">
+        <a href="#" style="left:200px;" @click="submitForm">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           登录
         </a>
-        <a href="#" style="left:240px;" @click="register">
+        <a href="#" style="left:200px;" @click="register">
           <span></span>
           <span></span>
           <span></span>
@@ -50,7 +50,8 @@
   </div>
 </template>
 <script lang="ts">
-import router from '@/router/index'
+import router from '@/router/index';
+import { ElMessage } from 'element-plus';
 import {api} from '../../global/api';
 //import {useRouter} from 'vue-router';
 import qs from 'qs';
@@ -88,11 +89,25 @@ export default {
           console.log(result.data.status)
           //打印返回用户的类型
           console.log(result.data.result.power)
+          const msg = result.data.mag;
+          //打印返回结果状态，
+
+            console.log(msg)
+            ElMessage.error(msg);
+
+
+
+
         }).catch(() => {
           //console.log(qs.stringify(ruleForm))
-          window.location.href="http://localhost:8080/home";
+          //window.location.href="http://localhost:8080/home";
           console.log("no")
+          const msg = "登录失败！请稍后尝试！";
+          ElMessage.error(msg);
           })}
+
+
+
     const submitForm = async () => {
       const form = unref(ruleFormsss);
       if (!form) return
@@ -113,7 +128,7 @@ export default {
     }
 
     const register=()=>{
-      window.location.href = 'http://localhost:8080/register';
+      window.location.href = '/register';
     }
     return {
       post,

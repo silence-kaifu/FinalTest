@@ -5,22 +5,28 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/Home/index.vue')
+    component: () => import('../views/Home/home.vue')
   },
   {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login/index.vue')
-   },
+  },
+  // {
+  //   path: '/login',
+  //   name: 'Login',
+  //   component: () => import('../views/LoginRegister/loginregister.vue')
+  // },
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/Register/register.vue')}
-  // {
-  //   path: '/:catchAll(.*)',
-  //   name: '/404',
-  //   component: () => import('../views/404.vue')
-  // }
+    component: () => import('../views/Register/register.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: '/404',
+    component: () => import('../views/Notfound/404.vue')
+  }
 ]
 
 const router = createRouter({
