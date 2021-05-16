@@ -93,7 +93,10 @@ export default {
           //打印返回结果状态，
 
             console.log(msg)
-            ElMessage.error(msg);
+            ElMessage.success({
+              message:msg,type:'success'});
+             window.location.href="http://localhost:8080";
+
 
 
 
