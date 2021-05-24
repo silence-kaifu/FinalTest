@@ -7,7 +7,7 @@ const $sql = require('../../sql/sqlMap')
 const connection = mysql.createConnection(db.mysql)
 connection.connect()
 // 登录验证语句
-const sql = $sql.user.consfirm
+const sql = $sql.user.confirm
 
 router.post('/', function (req, res, next) {
     var account = req.body.username;

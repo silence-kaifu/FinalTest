@@ -1,9 +1,9 @@
 const sqlMap = {
     user: {
         // 用户验证
-        consfirm: 'select * from tab_stu where account = ? and password = ?',
+        confirm: 'select * from tab_stu where account = ? and password = ?',
         // 用户注册
-        register: 'insert ignore into tab_stu(name, account, password, power) values(?,?,?,0)',
+        register: 'insert ignore into tab_stu(name, account, password, power, regTime) values(?,?,?,0,CURRENT_TIMESTAMP)',
         // 修改密码
         resetPass: 'update user set password = ? where username = ?',
         // 获取个人信息

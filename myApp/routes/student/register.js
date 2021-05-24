@@ -3,15 +3,16 @@ const router = express.Router();
 const mysql = require('mysql');
 const db = require('../../sql/db');
 const $sql = require('../../sql/sqlMap');
+const time = new Date();
 
 const connection = mysql.createConnection(db.mysql);
 connection.connect();
 const sql = $sql.user.register;
 
-router.post('/', (req, res, next) => {
+router.post('/',(req, res, next) => {
     let account = req.body.username;
     let password = req.body.password;
-    connection.query(sql, [account, account, password, 0], (err, result) => {
+    connection.query(sql, [account, account, password], (err, result) => {
         if (err) {
             console.log(err)
             return
